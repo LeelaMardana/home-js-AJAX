@@ -1,36 +1,45 @@
 'use strict';
-const getInfo = document.querySelector('.get-info');
-// let i = 1;
 
 const getData = () => {
-  return fetch('db.json')
-    .then(response => response.json())
-    .then(json => console.log(json));
+  return fetch('db.json').then(response => response.json());
 };
 
-getData();
-
-const sendData = ({ url, data }) => {
-  return fetch(url, {
+const sendData = user => {
+  return fetch('https://jsonplaceholder.typicode.com/posts', {
     method: 'POST',
-    body: data,
+    body: JSON.stringify(user),
     headers: {
       'Content-type': 'application/json; charset=UTF-8',
     },
   }).then(response => response.json());
 };
 
-sendData({
-  url: 'https://jsonplaceholder.typicode.com/posts',
-  data: JSON.stringify(getData),
-}).then(data => console.log(data));
+const showLocalData = object => {
+  const getInfo = document.querySelector('.get-info');
+  let i = 1;
 
-// const showWeb = () => {
-//   a.then(object => {
-//     for (const property in object) {
-//       const elem = document.createElement('span');
-//       elem.textContent = `${i++} ${property}: ${object[property]}`;
-//       getInfo.append(elem);
-//     }
-//   });
-// };
+  for (const property in object) {
+    const elem = document.createElement('span');
+    elem.textContent = `${i++} ${property}: ${object[property]}`;
+    getInfo.append(elem);
+  }
+};
+
+const showGlobalData = object => {
+  const postInfo = document.querySelector('.post-info');
+  let i = 1;
+
+  for (const property in object) {
+    const elem = document.createElement('span');
+    elem.textContent = `${i++} ${property}: ${object[property]}`;
+    postInfo.append(elem);
+  }
+};
+
+// Get and Show local Data
+getData().then(object => showLocalData(object));
+
+// Get, Send local Data and Show Global Data
+getData()
+  .then(json => sendData(json))
+  .then(object => showGlobalData(object));
