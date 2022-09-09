@@ -1,0 +1,55 @@
+:root {
+    --list-item-color-1: #ABC7EA;
+    --list-item-color-2: #EE997C;
+    --list-item-color-3: #EFDD89;
+    --hover-list-item-background: #D4D8D9;
+    --text-color: #808285;
+}
+
+#data-container {
+    list-style: none;
+    margin: 0;
+}
+
+#data-container li {
+    margin: 10px 0;
+    position: relative;
+}
+
+#data-container a {
+    width: 100%;
+    color: var(--text-color);
+    text-decoration: none;
+    border-left: 6px solid var(--list-item-color-1);
+    display: block;
+    padding-left: 25px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 20px;
+    position: relative;
+    transition: 0.3s linear;
+}
+
+#data-container a:before {
+    content: "";
+    width: 6px;
+    height: 70%;
+    background: var(--list-item-color-2);
+    position: absolute;
+    top: 15%;
+    left: -12px;
+}
+
+#data-container li:before {
+    content: "";
+    width: 6px;
+    height: 40%;
+    background: var(--list-item-color-3);
+    position: absolute;
+    top: 30%;
+    left: -12px;
+}
+
+#data-container a:hover {
+    background: var(--hover-list-item-background);
+}

@@ -1,0 +1,23 @@
+:root {
+    --default-image-size: 200px;
+}
+
+#data-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.photo-item {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+
+    max-width: var(--default-image-size);
+}
+
+.photo-item__image {
+    width: var(--default-image-size);
+    height: var(--default-image-size);
+}
