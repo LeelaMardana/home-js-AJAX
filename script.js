@@ -7,8 +7,8 @@ const getData = () => {
   return fetch('db.json').then(response => response.json());
 };
 
-const sendData = user => {
-  return fetch('https://jsonplaceholder.typicode.com/posts', {
+const postData = ({ user, url }) => {
+  return fetch(url, {
     method: 'POST',
     body: JSON.stringify(user),
     headers: {
@@ -31,5 +31,7 @@ getData()
     render(object, getInfo);
     return object;
   })
-  .then(json => sendData(json))
+  .then(json =>
+    postData({ user: json, url: 'https://jsonplaceholder.typicode.com/posts' })
+  )
   .then(object => render(object, postInfo));
