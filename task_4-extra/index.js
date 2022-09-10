@@ -8,25 +8,25 @@ const createComment = (author, text) => {
 
   const commentText = document.createElement('span');
   commentText.className = 'post-comment__text';
-  commentText.innerText = text;
+  commentText.innerText = `Хочу сказать, что ${text}`;
 
   comment.append(commentAuthor, commentText);
 
   return comment;
-}
+};
 
 const createPost = (postName, text, comments) => {
   const post = document.createElement('div');
   post.id = 'post';
   post.className = 'post';
-  
+
   const postTitle = document.createElement('h1');
   postTitle.className = 'post__title';
-  postTitle.innerText = postName; 
+  postTitle.innerText = `Название поста: ${postName}`;
 
   const postText = document.createElement('p');
   postText.className = 'post__text';
-  postText.innerText = text;
+  postText.innerText = `Описание поста: ${text}`;
 
   const commentsText = document.createElement('b');
   commentsText.className = 'post__comments-text';
@@ -35,7 +35,7 @@ const createPost = (postName, text, comments) => {
   const commentsBlock = document.createElement('div');
   commentsBlock.className = 'post__comments';
 
-  comments.forEach((comment) => {
+  comments.forEach(comment => {
     const commentHTML = createComment(comment.email, comment.body);
     commentsBlock.append(commentHTML);
   });
@@ -43,28 +43,27 @@ const createPost = (postName, text, comments) => {
   post.append(postTitle, postText, commentsText, commentsBlock);
 
   return post;
-}
+};
 
 const COMMENTS_URL = 'https://jsonplaceholder.typicode.com/comments';
 const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
 
-const renderPost = (postId) => {
-  fetch(`${POSTS_URL}/${postId}`)
-    .then((response) => response.json())
-    .then((post) => {
-      fetch(`${COMMENTS_URL}?postId=${post.id}`)
-        .then((response) => response.json())
-        .then((comments) => {
-          const postHTML = createPost(post.title, post.body, comments);
-          document.body.append(postHTML);
-        })
-        .catch((error) => {
-          console.error(error);
-        })
-    })
-    .catch((error) => {
+const renderComment = post => {
+  fetch(`${COMMENTS_URL}?postId=${post.id}`)
+    .then(response => response.json())
+    .then(data => document.body.append(createPost(post.title, post.body, data)))
+    .catch(error => {
       console.error(error);
-    })
-}
+    });
+};
+
+const renderPost = postId => {
+  fetch(`${POSTS_URL}/${postId}`)
+    .then(response => response.json())
+    .then(data => renderComment(data))
+    .catch(error => {
+      console.error(error);
+    });
+};
 
 renderPost(1);

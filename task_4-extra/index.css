@@ -1,50 +1,51 @@
 :root {
-    --main-background: #FAFAFA;
-    --post-background: #ffffff;
+  --main-background: #ef883f;
+  --post-background: #f0b732;
 }
 
 body {
-    background: var(--main-background);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background: var(--main-background);
+  display: flex;
+  font-size: 18px;
+  flex-direction: column;
+  align-items: center;
 
-    max-height: 100vh;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
+  max-height: 100vh;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 
 #post {
-    background: var(--post-background);
-    width: 65%;
-    height: 100%;
-    padding: 20px;
+  background: var(--post-background);
+  width: 65%;
+  height: 100%;
+  padding: 20px;
 
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .post__title {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
 .post__comments-text {
-    margin-bottom: 10px;
-    border-bottom: 1px solid;
+  margin-bottom: 10px;
+  border-bottom: 1px solid;
 }
 
 .post__comments {
-    overflow: auto;
+  overflow: auto;
 }
 
 .post-comment {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .post-comment__author {
-    font-style: italic;
+  font-style: italic;
 }
