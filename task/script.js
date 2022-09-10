@@ -51,10 +51,10 @@ const render = (object, path) => {
   }
 };
 
-let array = [];
+let array;
 
 button.addEventListener('click', () => {
-  array.forEach(item => item.remove()) || [];
+  (array || []).forEach(item => item.remove());
   toggleLoader();
   getData()
     .then(object => {
